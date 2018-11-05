@@ -52,11 +52,11 @@ class Snake:
         elif self.head_pos[0] >= 600:
             self.head_pos = (10, self.head_pos[1])
 
-        if self.head_pos[1] <= 0:
-            self.head_pos = (self.head_pos[0], 590)
+        if self.head_pos[1] < 0:
+            self.head_pos = (self.head_pos[0], 600)
 
         elif self.head_pos[1] >= 600:
-            self.head_pos = (self.head_pos[0], 10)
+            self.head_pos = (self.head_pos[0], 0)
 
         self.body_pos.insert(0, self.head_pos)
         if not self.new_body:  # don't delete if need to add new
