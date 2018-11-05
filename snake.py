@@ -45,12 +45,16 @@ class Snake:
             self.new_body = False
         if self.head_pos[0] < 0:
             self.head_pos = (620, self.head_pos[1])
+            self.direction = 'left'
         elif self.head_pos[0] > 600:
             self.head_pos = (-20, self.head_pos[1])
+            self.direction = 'right'
         if self.head_pos[1] < 0:
             self.head_pos = (self.head_pos[0], 620)
+            self.direction = 'up'
         elif self.head_pos[1] > 600:
             self.head_pos = (self.head_pos[0], -20)
+            self.direction = 'down'
 
     def draw_body(self):
         for block in self.body_pos:
@@ -108,6 +112,18 @@ def death():
     win.blit(fin_score_image, (fin_score_x, fin_score_y))
 
 
+def wall_collision(snake_x, snake_y, width):
+    if snake_x + width > res[0]:
+        return True
+    if snake_x - width < 0:
+        return True
+    if snake_y + width > res[1]:
+        return True
+    if snake_y + width < 0:
+        return True
+    return False
+
+
 def game():
     global food
     global food_eaten
@@ -128,14 +144,20 @@ def game():
         food_eaten = True
         score += 10
     head = True
+    if wall_collision(snake.head_pos[0], snake.head_pos[1], snake.width):
+        working = False
+        pygame.time.delay(1000)
+        death()
+        pygame.display.update()
+        pygame.time.delay(4000)
+
     for body in snake.body_pos:
         if (pygame.Rect(snake.head_pos[0], snake.head_pos[1], snake.width, snake.width)).colliderect(pygame.Rect(body[0], body[1], snake.width, snake.width)) and not head:
             working = False
-            pygame.time.delay(2000)
-            pygame.display.update()
+            pygame.time.delay(1000)
             death()
             pygame.display.update()
-            pygame.time.delay(5000)
+            pygame.time.delay(4000)
         else:
             head = False
 
