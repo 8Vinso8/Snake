@@ -30,6 +30,7 @@ class Snake:
         self.speed = 20
         self.direction = 'up'
         self.color = red
+        self.line_color = black
         self.width = 20
         self.new_body = False
 
@@ -67,6 +68,8 @@ class Snake:
     def draw_body(self):
         for block in self.body_pos:
             block_rect = pygame.Rect(block[0], block[1], self.width, self.width)
+            pygame.draw.rect(win, self.line_color, block_rect)
+            block_rect = pygame.Rect(block[0], block[1], self.width - 2, self.width - 2)
             pygame.draw.rect(win, self.color, block_rect)
 
 
