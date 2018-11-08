@@ -47,11 +47,11 @@ class Snake:
         elif self.direction == 'right':
             self.head_pos = (self.head_pos[0] + self.speed, self.head_pos[1])
 
-        if self.head_pos[0] <= 0:  # WALL COLLISION CHECK
-            self.head_pos = (590, self.head_pos[1])
+        if self.head_pos[0] < 0:  # WALL COLLISION CHECK
+            self.head_pos = (600, self.head_pos[1])
 
         elif self.head_pos[0] >= 600:
-            self.head_pos = (10, self.head_pos[1])
+            self.head_pos = (0, self.head_pos[1])
 
         if self.head_pos[1] < 0:
             self.head_pos = (self.head_pos[0], 600)
