@@ -100,13 +100,13 @@ def controls():
             if event.key == K_RIGHT:
                 if snake.direction != 'left':
                     snake.direction = 'right'
-            elif event.key == K_LEFT:
+            if event.key == K_LEFT:
                 if snake.direction != 'right':
                     snake.direction = 'left'
-            elif event.key == K_UP:
+            if event.key == K_UP:
                 if snake.direction != 'down':
                     snake.direction = 'up'
-            elif event.key == K_DOWN:
+            if event.key == K_DOWN:
                 if snake.direction != 'up':
                     snake.direction = 'down'
 
@@ -148,7 +148,7 @@ def game():
         score += 10
     head = True
     for body in snake.body_pos:
-        if (pygame.Rect(snake.head_pos[0], snake.head_pos[1], snake.width, snake.width)).colliderect(pygame.Rect(body[0], body[1], snake.width, snake.width)) and not head:
+        if (pygame.Rect(snake.head_pos[0], snake.head_pos[1], snake.width - 8, snake.width - 8)).colliderect(pygame.Rect(body[0], body[1], snake.width - 8, snake.width - 8)) and not head:
             working = False
             pygame.time.delay(2000)
             death()
